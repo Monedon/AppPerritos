@@ -1,6 +1,7 @@
 package cl.desafiolatam.appperritos.presenter;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -15,6 +16,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +96,7 @@ public class Presenter {
         Map<String, Object> fav = new HashMap<>();
         fav.put("breed", name);
         fav.put("image", image);
+        fav.put("timestamp", new Date().toString());
         db.collection("favorites")
                 .add(fav)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -136,6 +139,7 @@ public class Presenter {
         Favorite favorite = new Favorite();
         favorite.setBreed(document.getString("breed"));
         favorite.setImageURI(document.getString("image"));
+        favorite.setTimesStamp(document.getString("timestamp"));
         return favorite;
     }
 

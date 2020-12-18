@@ -24,7 +24,8 @@ public class AdapterFirebase extends RecyclerView.Adapter<AdapterFirebase.Fireba
     private static final String TAG = "Adapter";
     private List<String> firebaseList;
     private Context mContext;
-    List<Favorite> listFavorite;
+    private List<Favorite> listFavorite;
+    private String upperBreed;
 
     public AdapterFirebase(Context context, List<Favorite> getData) {
         this.mContext = context;
@@ -42,7 +43,9 @@ public class AdapterFirebase extends RecyclerView.Adapter<AdapterFirebase.Fireba
     @Override
     public void onBindViewHolder(@NonNull AdapterFirebase.FirebaseVH holder, int position) {
         Log.d(TAG, "onBindViewHolder: lista" + listFavorite);
-        holder.name.setText(listFavorite.get(position).getBreed());
+        upperBreed = listFavorite.get(position).getBreed().substring(0, 1).toUpperCase() + listFavorite.get(position).getBreed().substring(1);
+        holder.name.setText(upperBreed);
+        holder.time.setText(listFavorite.get(position).getTimesStamp());
         Glide.with(mContext).load(listFavorite.get(position).getImageURI()).override(300, 200).into(holder.imageView);
     }
 
@@ -60,10 +63,12 @@ public class AdapterFirebase extends RecyclerView.Adapter<AdapterFirebase.Fireba
     public class FirebaseVH extends RecyclerView.ViewHolder{
 
         TextView name;
+        TextView time;
         ImageView imageView;
 
         public FirebaseVH(@NonNull View itemView) {
             super(itemView);
+            time = itemView.findViewById(R.id.tvTimeStamp);
             name = itemView.findViewById(R.id.tvFirebase);
             imageView = itemView.findViewById(R.id.imageViewFirebase);
         }

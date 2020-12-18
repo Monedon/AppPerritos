@@ -4,10 +4,12 @@ public class Favorite {
 
     private String breed;
     private String imageURI;
+    private String timesStamp;
 
-    public Favorite(String breed, String imageURI) {
+    public Favorite(String breed, String imageURI, String timesStamp) {
         this.breed = breed;
         this.imageURI = imageURI;
+        this.timesStamp = timesStamp;
     }
 
     public Favorite() {
@@ -30,11 +32,20 @@ public class Favorite {
         this.imageURI = imageURI;
     }
 
+    public String getTimesStamp() {
+        return timesStamp;
+    }
+
+    public void setTimesStamp(String timesStamp) {
+        this.timesStamp = timesStamp;
+    }
+
     @Override
     public String toString() {
         return "Favorite{" +
                 "breed='" + breed + '\'' +
                 ", imageURI='" + imageURI + '\'' +
+                ", timesStamp='" + timesStamp + '\'' +
                 '}';
     }
 }
